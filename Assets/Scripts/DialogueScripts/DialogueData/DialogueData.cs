@@ -1,0 +1,16 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[Serializable]
+public struct Dialogue
+{
+    public string name;
+    [TextArea(5, 10)] public string text;
+}
+[CreateAssetMenu(fileName = "DialogueData", menuName = "ScriptableObject/TalkScript")]
+public class DialogueData : ScriptableObject
+{
+    public List<Dialogue> talkScript;
+}
