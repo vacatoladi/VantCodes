@@ -9,8 +9,8 @@ public class RaycastInteractor : MonoBehaviour
 
     public Camera playerCamera;
 
-    Transform newTransform;
-    Transform oldTransform;
+    //Transform newTransform;
+    //Transform oldTransform;
 
     Outline outline;
     Interactable interactable;
@@ -19,7 +19,7 @@ public class RaycastInteractor : MonoBehaviour
 
     public bool thatUiInteract = true;
     bool abredo;
-    bool noMoreFirstTime;
+    //bool noMoreFirstTime;
 
     void Update()
     {
@@ -28,16 +28,6 @@ public class RaycastInteractor : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, range) && hit.collider.CompareTag("Interagir"))
         {
-            newTransform = hit.collider.gameObject.transform;
-            if (newTransform != oldTransform && noMoreFirstTime)
-            {
-                outline.OutlineColor = new Color(1f, 1f, 1f, 0f);
-                oldTransform = newTransform;
-            }
-            else
-            {
-                noMoreFirstTime = true;
-            }
             abredo = true;
             outline = hit.collider.gameObject.GetComponent<Outline>();
             interactable = hit.collider.gameObject.GetComponent<Interactable>();
@@ -50,7 +40,9 @@ public class RaycastInteractor : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 action?.Invoke();
+                Reseting();
             }
+            
         }
         else if (abredo)
         {
@@ -62,9 +54,6 @@ public class RaycastInteractor : MonoBehaviour
     {
         abredo = false;
         outline.OutlineColor = new Color(1f, 1f, 1f, 0f);
-        //outline.OutlineWidth = 0;
-        //outline.enabled = false;
-        //thatUiInteract = false;
         Interagir.SetActive(false);
         action = null;
         interactable = null;

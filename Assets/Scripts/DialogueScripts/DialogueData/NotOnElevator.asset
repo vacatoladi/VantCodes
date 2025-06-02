@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5dec3cb38175348846bdf21ec0bbc5, type: 3}
   m_Name: NotOnElevator
   m_EditorClassIdentifier: 
-  talkScript: []
+  talkScript:
+  - name: player
+    text: devo entrar no elevador antes

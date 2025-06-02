@@ -28,9 +28,17 @@ public class Interactable : MonoBehaviour
 
     public Object actualObject;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Tem();
+        }
+    }
+
     public void Selection()
     {
-         
+        Debug.Log("abriste a Selecao");
         switch (actualObject)
         {
             case Object.Campainha:
@@ -47,6 +55,7 @@ public class Interactable : MonoBehaviour
 
     void Campainha()
     {
+        Debug.Log("abriste a campainha");
         if (secretariaFirstDialogue && !alreadyChating)
         {
             alreadyChating = true;
@@ -68,38 +77,74 @@ public class Interactable : MonoBehaviour
 
     void Elevator()
     {
-
+        Debug.Log("abriste o Elevator");
     }
 
     void WrongNumElevator()
     {
-        if (!alreadyChating)
+
+        Debug.Log("abriste a campainha");
+        if (secretariaFirstDialogue && !alreadyChating)
         {
-            if (playerC.inElevator) 
-            {
-                alreadyChating = true;
-                dataController.WhichData(4);    
-                dialogueSystem.Next();
-                uiInteract = false;
-                InteragirUI.SetActive(uiInteract);
-            }
-            else
-            {
-                alreadyChating = true;
-                dataController.WhichData(3);
-                dialogueSystem.Next();
-                uiInteract = false;
-                InteragirUI.SetActive(uiInteract);
-            }
+            alreadyChating = true;
+            secretariaFirstDialogue = false;
+            dataController.WhichData(1);
+            dialogueSystem.Next();
+            uiInteract = false;
+            InteragirUI.SetActive(uiInteract);
         }
+        else if (!alreadyChating)
+        {
+            alreadyChating = true;
+            dataController.WhichData(2);
+            dialogueSystem.Next();
+            uiInteract = false;
+            InteragirUI.SetActive(uiInteract);
+        }
+
+        //Debug.Log("abriste o wrongNum");
+        //if (!alreadyChating)
+        //{
+        //    if (playerC.inElevator) 
+        //    {
+        //        alreadyChating = true;
+        //        dataController.WhichData(4);    
+        //        dialogueSystem.Next();
+        //        uiInteract = false;
+        //        InteragirUI.SetActive(uiInteract);
+        //    }
+        //    else
+        //    {
+        //        alreadyChating = true;
+        //        dataController.WhichData(3);
+        //        dialogueSystem.Next();
+        //        uiInteract = false;
+        //        InteragirUI.SetActive(uiInteract);
+        //    }
+        //}
 
     }
 
     public void ContinueChat()
     {
+        Debug.Log("abriste o Continue");
         alreadyChating = false;
         uiInteract = true;
+        //Debug.Log("isso ativou e deixou interact como " + uiInteract);
+    }
 
+    public void Tem()
+    {
+        
+        switch (actualObject)
+        {
+            case Object.Campainha:
+                Debug.Log("campainha está " + uiInteract);
+                break;
+            case Object.WrongNumElevator:
+                Debug.Log("wrong esta " + uiInteract);
+                break;
+        }
     }
 
 }

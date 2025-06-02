@@ -141,6 +141,7 @@ public class DialogueSystem : MonoBehaviour
                 // Isso serve para poder avisar que o dialogo acabou, fazendo reativar algumas funcões nesses scripts
 
                 interactable.ContinueChat();
+                
             }
         }
     }
