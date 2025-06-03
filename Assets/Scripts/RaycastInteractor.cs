@@ -73,6 +73,11 @@ public class RaycastInteractor : MonoBehaviour
                 Enable(hit);
                 action = WrongNumElevator;
             }
+            else if (hit.collider.CompareTag("OpenElevator"))
+            {
+                Enable(hit);
+                action = OpenElevator;
+            }
             else if (abredo)
             {
                 Reseting();
@@ -177,7 +182,7 @@ public class RaycastInteractor : MonoBehaviour
 
     void OpenElevator()
     {
-
+        StartCoroutine(OpenElevatorC());
     }
 
     public void ContinueChat()
@@ -187,6 +192,8 @@ public class RaycastInteractor : MonoBehaviour
         Debug.Log("passou aqui e deixou o Chating "+alreadyChating+" e deixou o Interact "+uiInteract);
     }
 
+    
+
     IEnumerator Coisa()
     {
         yield return new WaitForSeconds(1);
@@ -195,13 +202,14 @@ public class RaycastInteractor : MonoBehaviour
     {
         for (elevatorIntFor = elevatorIntFor; elevatorIntFor > 0; elevatorIntFor--)
         {
-            elevatorDownLeftDoor.position = elevatorDownLeftDoor.position + new Vector3(0, 0, 0, -0.735f);
-            elevatorDownLeftDoor.position = elevatorUpLeftDoor.position + new Vector3(0, 0, -0.735f);
-            elevatorDownLeftDoor.position = elevatorDownRightDoor.position + new Vector3(0, 0, -0.735f);
-            elevatorDownLeftDoor.position = elevatorUpRightDoor.position + new Vector3(0, 0, -0.735f);
+            elevatorDownLeftDoor.position = elevatorDownLeftDoor.position + new Vector3(0, 0, -0.0735f);
+            elevatorUpLeftDoor.position = elevatorUpLeftDoor.position + new Vector3(0, 0, -0.0735f);
+            elevatorDownRightDoor.position = elevatorDownRightDoor.position + new Vector3(0, 0, 0.0735f);
+            elevatorUpRightDoor.position = elevatorUpRightDoor.position + new Vector3(0, 0, 0.0735f);
 
             yield return new WaitForSeconds(0.15f);
         }
+
         
     }
 
