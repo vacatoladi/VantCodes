@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -21,6 +22,12 @@ public class RaycastInteractor : MonoBehaviour
 
     float range = 5f;
 
+    public Transform elevatorDownLeftDoor;
+    public Transform elevatorUpLeftDoor;
+    public Transform elevatorDownRightDoor;
+    public Transform elevatorUpRightDoor;
+    int elevatorIntFor = 20;
+
     [SerializeField] bool uiInteract;
     [SerializeField] bool alreadyChating;
     [SerializeField] bool abredo;
@@ -30,6 +37,8 @@ public class RaycastInteractor : MonoBehaviour
     void Start()
     {
         uiInteract = true;
+
+        
     }
 
     void Update()
@@ -122,7 +131,25 @@ public class RaycastInteractor : MonoBehaviour
 
     void Elevator()
     {
-
+        if (!alreadyChating)
+        {
+            if (playerC.inElevator)
+            {
+                alreadyChating = true;
+                dataController.WhichData(5);
+                dialogueSystem.Next();
+                uiInteract = false;
+                Interagir.SetActive(uiInteract);
+            }
+            else
+            {
+                alreadyChating = true;
+                dataController.WhichData(3);
+                dialogueSystem.Next();
+                uiInteract = false;
+                Interagir.SetActive(uiInteract);
+            }
+        }
     }
 
     void WrongNumElevator()
@@ -148,11 +175,39 @@ public class RaycastInteractor : MonoBehaviour
         }
     }
 
+    void OpenElevator()
+    {
+
+    }
+
     public void ContinueChat()
     {
         alreadyChating = false;
         uiInteract = true;
         Debug.Log("passou aqui e deixou o Chating "+alreadyChating+" e deixou o Interact "+uiInteract);
+    }
+
+    IEnumerator Coisa()
+    {
+        yield return new WaitForSeconds(1);
+    }
+    IEnumerator OpenElevatorC()
+    {
+        for (elevatorIntFor = elevatorIntFor; elevatorIntFor > 0; elevatorIntFor--)
+        {
+            elevatorDownLeftDoor.position = elevatorDownLeftDoor.position + new Vector3(0, 0, 0, -0.735f);
+            elevatorDownLeftDoor.position = elevatorUpLeftDoor.position + new Vector3(0, 0, -0.735f);
+            elevatorDownLeftDoor.position = elevatorDownRightDoor.position + new Vector3(0, 0, -0.735f);
+            elevatorDownLeftDoor.position = elevatorUpRightDoor.position + new Vector3(0, 0, -0.735f);
+
+            yield return new WaitForSeconds(0.15f);
+        }
+        
+    }
+
+    IEnumerator CloseElevatorC()
+    {
+        yield return new WaitForSeconds(1);
     }
 
 }
