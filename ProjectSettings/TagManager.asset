@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Interagir
+  - Campainha
+  - WrongElevatorNum
+  - Elevator
   layers:
   - Default
   - TransparentFX

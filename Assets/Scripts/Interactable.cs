@@ -82,55 +82,32 @@ public class Interactable : MonoBehaviour
 
     void WrongNumElevator()
     {
-
-        Debug.Log("abriste a campainha");
-        if (secretariaFirstDialogue && !alreadyChating)
+        if (!alreadyChating)
         {
-            alreadyChating = true;
-            secretariaFirstDialogue = false;
-            dataController.WhichData(1);
-            dialogueSystem.Next();
-            uiInteract = false;
-            InteragirUI.SetActive(uiInteract);
+            if (playerC.inElevator)
+            {
+                alreadyChating = true;
+                dataController.WhichData(4);
+                dialogueSystem.Next();
+                uiInteract = false;
+                InteragirUI.SetActive(uiInteract);
+            }
+            else
+            {
+                alreadyChating = true;
+                dataController.WhichData(3);
+                dialogueSystem.Next();
+                uiInteract = false;
+                InteragirUI.SetActive(uiInteract);
+            }
         }
-        else if (!alreadyChating)
-        {
-            alreadyChating = true;
-            dataController.WhichData(2);
-            dialogueSystem.Next();
-            uiInteract = false;
-            InteragirUI.SetActive(uiInteract);
-        }
-
-        //Debug.Log("abriste o wrongNum");
-        //if (!alreadyChating)
-        //{
-        //    if (playerC.inElevator) 
-        //    {
-        //        alreadyChating = true;
-        //        dataController.WhichData(4);    
-        //        dialogueSystem.Next();
-        //        uiInteract = false;
-        //        InteragirUI.SetActive(uiInteract);
-        //    }
-        //    else
-        //    {
-        //        alreadyChating = true;
-        //        dataController.WhichData(3);
-        //        dialogueSystem.Next();
-        //        uiInteract = false;
-        //        InteragirUI.SetActive(uiInteract);
-        //    }
-        //}
 
     }
 
     public void ContinueChat()
     {
-        Debug.Log("abriste o Continue");
         alreadyChating = false;
         uiInteract = true;
-        //Debug.Log("isso ativou e deixou interact como " + uiInteract);
     }
 
     public void Tem()

@@ -32,7 +32,7 @@ public class DialogueSystem : MonoBehaviour
 
     // Variaveis para ativação do dialogo coisas com collider trigger ou outro meio
 
-    public Interactable interactable;
+    public RaycastInteractor raycastInteractor;
 
     // Variaveis para completar missão, deve ser usado na função Next()
 
@@ -140,7 +140,7 @@ public class DialogueSystem : MonoBehaviour
 
                 // Isso serve para poder avisar que o dialogo acabou, fazendo reativar algumas funcões nesses scripts
 
-                interactable.ContinueChat();
+                raycastInteractor.ContinueChat();
                 
             }
         }
